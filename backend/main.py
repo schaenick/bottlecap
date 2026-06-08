@@ -15,7 +15,10 @@ app = FastAPI(lifespan=lifespan)
 
 @app.get("/colors")
 def get_colors():
-    init_db()
+
     con = get_db()
     cur = con.cursor()
-    cur.execute("CREATE TABLE movie(title, year, score)")
+    colors = cur.execute("SELECT * FROM colors").fetchall()
+
+    con.close()
+    return colors
