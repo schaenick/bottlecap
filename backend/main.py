@@ -2,7 +2,6 @@ from fastapi import FastAPI, Path, HTTPException
 from database import get_db, init_db
 from models import Color, ColorUpdate
 from contextlib import asynccontextmanager
-import sqlite3
 
 
 @asynccontextmanager
