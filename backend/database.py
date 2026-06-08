@@ -22,7 +22,8 @@ def init_db():
         hex VARCHAR(10), 
         description TEXT, 
         brand VARCHAR(50), 
-        owned BOOL, 
+        owned BOOL,
+        reorder BOOL, 
         comment TEXT)
         """)
     con.commit()

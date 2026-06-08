@@ -11,9 +11,11 @@ class Color(BaseModel):
     description: Optional[str] = None
     brand: str
     owned: bool
+    reorder: bool
     comment: Optional[str] = None
 
 
 class ColorUpdate(BaseModel):
     owned: Optional[bool] = None
     comment: Optional[str] = None
+    reorder: Optional[bool] = None
