@@ -3,7 +3,7 @@ import { ActivityIndicator } from 'react-native';
 import { StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Color } from "./types/color";
-import { getColors } from './services/api';
+import { getColors, updateColor } from './services/api';
 import BottleIcon from './components/BottleIcon'
 import ColorCard from './components/ColorCard';
 import ColorGrid from './components/ColorGrid';
@@ -12,13 +12,31 @@ import ColorGrid from './components/ColorGrid';
 export default function App(){
   const [colors, setColors] = useState<Color[]>([])
   const [loading, setLoading] = useState(true)
-  const handleToggleOwned = (id: number) => {
-    // hier kommt später der API call
+
+  const handleToggleOwned = async (id: number) => {
+    const color = colors.find(c => c.id === id)
+    if (!color) return
+    
+    const newOwned = !color.owned
+    await updateColor(id, { owned: newOwned })
+    
+    setColors(colors.map(c => 
+        c.id === id ? { ...c, owned: newOwned } : c
+    ))
 }
 
-  const handleToggleReorder = (id: number) => {
-      // hier kommt später der API call
-  }
+
+const handleToggleReorder = async (id: number) => {
+    const color = colors.find(c => c.id === id)
+
+    if (!color) return
+    const newReorder = !color.reorder
+    await updateColor(id, { reorder: newReorder })
+    
+    setColors(colors.map(c => 
+        c.id === id ? { ...c, reorder: newReorder } : c
+    ))
+}
   useEffect(() => {
       const load = async () => {
           const data = await getColors()
