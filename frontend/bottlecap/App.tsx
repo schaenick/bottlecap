@@ -1,9 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
+import { ActivityIndicator } from 'react-native'; 
 import { StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Color } from "./types/color";
 import { getColors } from './services/api';
 import BottleIcon from './components/BottleIcon'
+import ColorCard from './components/ColorCard';
+
 
 export default function App(){
   const [colors, setColors] = useState<Color[]>([])
@@ -13,17 +16,18 @@ export default function App(){
           const data = await getColors()
           setColors(data)
           setLoading(false)  
-          console.log(colors)
       }
       load(); 
   }, []) 
   return (
-    <View>
-        <BottleIcon color="#aa1f18" />
-        <Text>Hallo</Text>
-    </View>
-)
-}
+      loading ? (
+          <ActivityIndicator />
+      ) : (
+          <View>
+              <ColorCard color={colors[3]} onToggleOwned={() => {}} onToggleReorder={() => {}} />
+          </View>
+      )
+  )}
 
 
 
