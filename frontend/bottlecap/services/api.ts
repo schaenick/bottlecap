@@ -1,6 +1,6 @@
 import { Color } from "../types/color";
 
-const API_URL = "http://localhost:8001/colors"
+const API_URL = "https://api.bottlecap.klingfer.de/colors"
 
 export async function getColors(): Promise<Color[]>
 {

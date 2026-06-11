@@ -3,7 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { useState, useEffect } from 'react';
 import { Color } from "./types/color";
 import { getColors } from './services/api';
-
+import BottleIcon from './components/BottleIcon'
 
 export default function App(){
   const [colors, setColors] = useState<Color[]>([])
@@ -12,13 +12,14 @@ export default function App(){
       const load = async () => {
           const data = await getColors()
           setColors(data)
-          console.log(colors)
           setLoading(false)  
+          console.log(colors)
       }
       load(); 
   }, []) 
   return (
     <View>
+        <BottleIcon color="#aa1f18" />
         <Text>Hallo</Text>
     </View>
 )
