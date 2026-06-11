@@ -19,3 +19,4 @@ class ColorUpdate(BaseModel):
     owned: Optional[bool] = None
     comment: Optional[str] = None
     reorder: Optional[bool] = None
+    description: Optional[str] = None

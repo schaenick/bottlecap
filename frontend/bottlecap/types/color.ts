@@ -10,3 +10,12 @@ export interface Color {
     reorder: boolean;
     comment?: string;
 }
+
+
+export interface ColorUpdate {
+    owned?: boolean
+    reorder?: boolean
+    comment?: string
+    description?: string
+
+}
