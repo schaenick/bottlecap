@@ -25,7 +25,8 @@ export default function App() {
         (c) =>
           filter === "all" ||
           (filter === "owned" && c.owned) ||
-          (filter === "reorder" && c.reorder),
+          (filter === "reorder" && c.reorder) ||
+          (filter === "notowned" && !c.owned),
       )
       .filter((c) => brand === "all" || c.brand.includes(brand))
       .filter(

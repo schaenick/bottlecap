@@ -1,6 +1,6 @@
 import { SvgXml } from "react-native-svg";
 import { theme } from "../theme/theme";
-import { View, Image, StyleSheet } from "react-native";
+import { getGradientStops } from "../utils/colorEffects";
 
 interface BottleIconProps {
   color: string;
@@ -33,33 +33,8 @@ const bottleSvg = `<svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="
 
 export default function BottleIcon({ color, brand, name }: BottleIconProps) {
   const b = brand.toLowerCase();
-  const n = name.toLowerCase();
 
-  let dark = shade(color, 0.4);
-  let light = shade(color, 3);
-
-  if (name.toLowerCase().includes("black")) {
-    dark = "#000000";
-    light = "#ffffff";
-  }
-
-  let stops = "";
-  if (b.includes("metal") || n.includes("medium")) {
-    stops = `
-      <stop offset="0%" stop-color="white" stop-opacity="0" />
-      <stop offset="50%" stop-color="white" stop-opacity="0.9" />
-      <stop offset="100%" stop-color="white" stop-opacity="0" />`;
-  } else if (b.includes("wash")) {
-    stops = `
-      <stop offset="0%" stop-color="${light}" stop-opacity="0" />
-      <stop offset="100%" stop-color="${dark}" stop-opacity="0.5" />`;
-  } else if (b.includes("speed") || b.includes("xpress")) {
-    stops = `
-      <stop offset="0%" stop-color="${light}" stop-opacity="0.4" />
-      <stop offset="35%" stop-color="${light}" stop-opacity="0" />
-      <stop offset="65%" stop-color="${dark}" stop-opacity="0" />
-      <stop offset="100%" stop-color="${dark}" stop-opacity="0.6" />`;
-  }
+  const stops = getGradientStops(color, brand, name);
 
   const overlay = stops
     ? `<defs>

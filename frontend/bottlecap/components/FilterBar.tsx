@@ -23,7 +23,20 @@ export default function FilterBar({
         <Text
           style={[styles.chipText, filter === "owned" && styles.chipTextActive]}
         >
-          Im Besitz
+          Vorhanden
+        </Text>
+      </TouchableOpacity>
+      <TouchableOpacity
+        style={[styles.chip, filter === "notowned" && styles.chipActive]}
+        onPress={() => onFilterChange("notowned")}
+      >
+        <Text
+          style={[
+            styles.chipText,
+            filter === "notowned" && styles.chipTextActive,
+          ]}
+        >
+          Fehlen
         </Text>
       </TouchableOpacity>
 

@@ -42,12 +42,12 @@ function ColorCard({
       {color.owned ? (
         <TouchableOpacity style={styles.chip} onPress={onToggleReorder}>
           <Text style={styles.chipText}>
-            {color.reorder ? "Reordered?" : "Reorder"}
+            {color.reorder ? "Fast leer" : "Vorhanden"}
           </Text>
         </TouchableOpacity>
       ) : (
         <TouchableOpacity style={styles.chip} onPress={onToggleOwned}>
-          <Text style={styles.chipText}>Owned</Text>
+          <Text style={styles.chipText}>Nicht vorhanden</Text>
         </TouchableOpacity>
       )}
     </TouchableOpacity>

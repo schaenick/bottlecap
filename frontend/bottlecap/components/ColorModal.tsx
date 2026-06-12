@@ -12,6 +12,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Color } from "../types/color";
 import { theme } from "../theme/theme";
 import BottleIcon from "./BottleIcon";
+import ColorSwatch from "./ColorSwatch";
 
 interface ColorModalProps {
   color: Color | null;
@@ -67,7 +68,7 @@ export default function ColorModal({
           >
             {color && (
               <View style={styles.content}>
-                <BottleIcon
+                <ColorSwatch
                   color={color.hex ?? "#cccccc"}
                   brand={color.brand}
                   name={color.name}
@@ -104,7 +105,7 @@ export default function ColorModal({
                         color.owned && styles.toggleTextActive,
                       ]}
                     >
-                      {color.owned ? "Im Besitz ✓" : "Nicht im Besitz"}
+                      {color.owned ? "Vorhanden" : "Nicht Vorhanden"}
                     </Text>
                   </TouchableOpacity>
 
@@ -207,7 +208,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     padding: theme.spacing.lg,
-    paddingTop: 0,
+    paddingTop: theme.spacing.xl ?? 24,
   },
   content: {
     alignItems: "center",
