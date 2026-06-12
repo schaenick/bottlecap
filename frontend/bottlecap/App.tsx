@@ -29,7 +29,8 @@ export default function App() {
         (c) =>
           search === "" ||
           c.name.toLowerCase().includes(search.toLowerCase()) ||
-          c.article_number.includes(search),
+          c.article_number.includes(search) ||
+          c.brand.toLowerCase().includes(search.toLowerCase()),
       );
   }, [colors, filter, brand, search]);
 
