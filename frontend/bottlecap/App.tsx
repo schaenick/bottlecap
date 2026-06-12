@@ -1,12 +1,12 @@
 
-import { ActivityIndicator } from 'react-native'; 
-import { StyleSheet, Text, View } from 'react-native';
+import {  View, ActivityIndicator } from 'react-native';
 import { useState,useMemo, useEffect } from 'react';
 import { Color } from "./types/color";
 import { getColors, updateColor } from './services/api';
 import ColorGrid from './components/ColorGrid';
 import SearchBar from './components/SearchBar';
 import FilterBar from './components/FilterBar';
+import Header from './components/Header';
 
 
 export default function App(){
@@ -52,6 +52,10 @@ const handleToggleReorder = async (id: number) => {
     ))
 }
 
+
+
+
+
   useEffect(() => {
       const load = async () => {
           const data = await getColors()
@@ -61,38 +65,32 @@ const handleToggleReorder = async (id: number) => {
       load(); 
   }, []) 
   return (
-      loading ? (
-          <ActivityIndicator />
-      ) : (
-        <View>
-            <SearchBar 
-    value={search} 
-    onChangeText={setSearch} 
-/>
-<View> <FilterBar 
-filter = {filter}
-brand = {brand}
-onBrandChange={setBrand}
-onFilterChange={setFilter}  />
-</View>
-        
-          <View>
-              <ColorGrid 
-    colors={filteredColors} 
-    onToggleOwned={handleToggleOwned}
-    onToggleReorder={handleToggleReorder}
-/>
-          </View></View>
-      )
-  )}
+    <View style={{ flex: 1, backgroundColor: '#F0EEE9' }}>
+        <Header />
+            {loading ? (
+                <ActivityIndicator />
+                ) : (
+                <View>
+                    <SearchBar 
+                        value={search} 
+                        onChangeText={setSearch} 
+                    />
+                
+                     <FilterBar 
+                        filter = {filter}
+                        brand = {brand}
+                        onBrandChange={setBrand}
+                        onFilterChange={setFilter}  />
+                
 
+                    <ColorGrid 
+                        colors={filteredColors} 
+                        onToggleOwned={handleToggleOwned}
+                        onToggleReorder={handleToggleReorder}
+                    />
+                </View>
 
+                )}
+        </View>)
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+            }
