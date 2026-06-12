@@ -36,6 +36,13 @@ export default function App() {
 
   const ownedCount = colors.filter((c) => c.owned).length;
 
+  const handleFilterChange = (value: string) => {
+    setFilter(filter === value ? "all" : value);
+  };
+
+  const handleBrandChange = (value: string) => {
+    setBrand(brand === value ? "all" : value);
+  };
   const handleToggleOwned = async (id: number) => {
     const color = colors.find((c) => c.id === id);
     if (!color) return;
@@ -75,12 +82,11 @@ export default function App() {
         ) : (
           <View style={{ flex: 1 }}>
             <SearchBar value={search} onChangeText={setSearch} />
-
             <FilterBar
               filter={filter}
               brand={brand}
-              onBrandChange={setBrand}
-              onFilterChange={setFilter}
+              onBrandChange={handleBrandChange}
+              onFilterChange={handleFilterChange}
             />
 
             <ColorGrid
