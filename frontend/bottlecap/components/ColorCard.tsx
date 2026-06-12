@@ -26,7 +26,11 @@ function ColorCard({
       <Text style={styles.arttext} numberOfLines={1}>
         {color.article_number}
       </Text>
-      <BottleIcon color={color.hex ?? "#cccccc"} />
+      <BottleIcon
+        color={color.hex ?? "#cccccc"}
+        brand={color.brand}
+        name={color.name}
+      />
       <Text style={styles.nametext} numberOfLines={2}>
         {color.name}
       </Text>

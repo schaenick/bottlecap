@@ -1,7 +1,7 @@
 export const theme = {
   colors: {
     background: "#F0EEE9",
-    card: "#FFFFFF",
+    card: "#fbfbfb",
     headerBg: "#a3a3a3",
     chip: "#F5F5F5",
     chipActive: "#E0B7F4",
