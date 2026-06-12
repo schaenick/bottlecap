@@ -6,6 +6,7 @@ import { Color } from "./types/color";
 import { getColors, updateColor } from './services/api';
 import ColorGrid from './components/ColorGrid';
 import SearchBar from './components/SearchBar';
+import FilterBar from './components/FilterBar';
 
 
 export default function App(){
@@ -17,8 +18,9 @@ export default function App(){
 
    const filteredColors = useMemo(() => {
     return colors
-        .filter(c => filter === 'all' || (filter === 'owned' && c.owned))
-        .filter(c => brand === 'all' || c.brand === brand)
+
+        .filter(c => filter === 'all' || (filter === 'owned' && c.owned) || (filter === 'reorder' && c.reorder))
+        .filter(c => brand === 'all' || c.brand.includes(brand))
         .filter(c => 
             search === '' || 
             c.name.toLowerCase().includes(search.toLowerCase()) ||
@@ -67,6 +69,12 @@ const handleToggleReorder = async (id: number) => {
     value={search} 
     onChangeText={setSearch} 
 />
+<View> <FilterBar 
+filter = {filter}
+brand = {brand}
+onBrandChange={setBrand}
+onFilterChange={setFilter}  />
+</View>
         
           <View>
               <ColorGrid 
