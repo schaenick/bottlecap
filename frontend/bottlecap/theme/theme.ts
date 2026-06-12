@@ -1,0 +1,36 @@
+export const theme = {
+  colors: {
+    background: "#F0EEE9",
+    card: "#FFFFFF",
+    headerBg: "#a3a3a3",
+    chip: "#F5F5F5",
+    chipActive: "#E0B7F4",
+    text: "#333333",
+    textMuted: "#888888",
+    accentPink: "#F2B5E1",
+    accentBlue: "#BFDEF3",
+    accentMint: "#B9E9E9",
+    accentPeach: "#FFC9B4",
+    accentLilac: "#E0B7F4",
+  },
+  fontSize: {
+    tiny: 8,
+    small: 10,
+    medium: 13,
+    large: 15,
+    title: 24,
+  },
+  spacing: {
+    xs: 4,
+    sm: 8,
+    md: 12,
+    lg: 16,
+    xl: 24,
+    top: 52,
+  },
+  radius: {
+    sm: 8,
+    md: 16,
+    lg: 20,
+  },
+};

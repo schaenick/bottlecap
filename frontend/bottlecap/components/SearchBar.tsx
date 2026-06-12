@@ -1,4 +1,5 @@
 import { StyleSheet, TextInput, View } from "react-native";
+import { theme } from "../theme/theme";
 
 interface SearchBarProps {
   onChangeText: (value: string) => void;
@@ -20,17 +21,17 @@ export default function SearchBar({ onChangeText, value }: SearchBarProps) {
 }
 const styles = StyleSheet.create({
   container: {
-    margin: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    backgroundColor: "#F5F5F5",
-    borderRadius: 20,
+    margin: theme.spacing.md,
+    paddingHorizontal: theme.spacing.lg,
+    paddingVertical: theme.spacing.md,
+    backgroundColor: theme.colors.chip,
+    borderRadius: theme.radius.lg,
     flexDirection: "row",
     alignItems: "center",
   },
   input: {
     flex: 1,
-    fontSize: 15,
-    color: "#333",
+    fontSize: theme.fontSize.large,
+    color: theme.colors.text,
   },
 });

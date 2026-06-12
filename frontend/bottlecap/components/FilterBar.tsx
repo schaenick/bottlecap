@@ -1,4 +1,5 @@
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
+import { theme } from "../theme/theme";
 
 interface FilterBarProps {
   onFilterChange: (value: string) => void;
@@ -62,21 +63,21 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     flexWrap: "wrap",
-    paddingHorizontal: 8,
-    gap: 6,
-    marginBottom: 8,
+    paddingHorizontal: theme.spacing.sm,
+    gap: theme.spacing.sm,
+    marginBottom: theme.spacing.sm,
   },
   chip: {
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 16,
-    backgroundColor: "#F5F5F5",
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    borderRadius: theme.radius.md,
+    backgroundColor: theme.colors.chip,
   },
   chipActive: {
-    backgroundColor: "#E0B7F4",
+    backgroundColor: theme.colors.chipActive,
   },
   chipText: {
-    fontSize: 13,
-    color: "#555",
+    fontSize: theme.fontSize.medium,
+    color: theme.colors.text,
   },
 });

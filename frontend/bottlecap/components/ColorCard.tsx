@@ -1,6 +1,9 @@
 import { Color } from "../types/color";
 import BottleIcon from "./BottleIcon";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { cardWidth } from "./ColorGrid";
+import { theme } from "../theme/theme";
+import { memo } from "react";
 
 interface ColorCardProps {
   color: Color;
@@ -8,11 +11,7 @@ interface ColorCardProps {
   onToggleReorder: () => void;
 }
 
-export default function ColorCard({
-  color,
-  onToggleOwned,
-  onToggleReorder,
-}: ColorCardProps) {
+function ColorCard({ color, onToggleOwned, onToggleReorder }: ColorCardProps) {
   return (
     <View style={styles.card}>
       <Text style={styles.brandtext} numberOfLines={2}>
@@ -39,55 +38,49 @@ export default function ColorCard({
     </View>
   );
 }
+export default memo(ColorCard);
+
 const styles = StyleSheet.create({
   card: {
-    flex: 1,
-    margin: 4,
-    backgroundColor: "white",
-    borderRadius: 8,
-    padding: 6,
+    width: cardWidth,
+    margin: theme.spacing.xs,
+    backgroundColor: theme.colors.card,
+    borderRadius: theme.radius.sm,
+    padding: theme.spacing.sm,
     alignItems: "center",
     justifyContent: "space-between",
     minHeight: 200,
   },
-  container: {
-    margin: 12,
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    backgroundColor: "#F5F5F5",
-    borderRadius: 20,
-    flexDirection: "row",
-    alignItems: "center",
-  },
+
   brandtext: {
-    fontSize: 8,
+    fontSize: theme.fontSize.tiny,
     fontWeight: "800",
-    color: "#333",
+    color: theme.colors.text,
     textAlign: "center",
     minHeight: 22,
   },
   arttext: {
-    fontSize: 10,
+    fontSize: theme.fontSize.small,
     fontWeight: "300",
-    color: "#333",
+    color: theme.colors.text,
     textAlign: "center",
     minHeight: 14,
   },
   nametext: {
-    fontSize: 15,
-    color: "#333",
+    fontSize: theme.fontSize.large,
+    color: theme.colors.text,
     textAlign: "center",
     minHeight: 40,
   },
 
   chip: {
-    paddingHorizontal: 14,
-    paddingVertical: 6,
-    borderRadius: 16,
-    backgroundColor: "#F5F5F5",
+    paddingHorizontal: theme.spacing.md,
+    paddingVertical: theme.spacing.sm,
+    borderRadius: theme.radius.md,
+    backgroundColor: theme.colors.chip,
   },
   chipText: {
-    fontSize: 10,
-    color: "#555",
+    fontSize: theme.fontSize.small,
+    color: theme.colors.textMuted,
   },
 });

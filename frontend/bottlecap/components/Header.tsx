@@ -1,4 +1,5 @@
 import { View, Text, StyleSheet } from "react-native";
+import { theme } from "../theme/theme";
 
 export default function Header() {
   return (
@@ -10,18 +11,18 @@ export default function Header() {
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: "#333333",
-    paddingTop: 52,
-    paddingBottom: 16,
-    paddingHorizontal: 24,
+    backgroundColor: theme.colors.headerBg,
+    paddingTop: theme.spacing.top,
+    paddingBottom: theme.spacing.lg,
+    paddingHorizontal: theme.spacing.xl,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
   },
   title: {
-    fontSize: 24,
+    fontSize: theme.fontSize.title,
     fontWeight: "200",
-    color: "#ffffff",
+    color: theme.colors.card,
     letterSpacing: 2,
   },
 });
