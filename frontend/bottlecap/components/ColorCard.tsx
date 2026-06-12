@@ -8,6 +8,7 @@ import { memo } from "react";
 interface ColorCardProps {
   color: Color;
   cardWidth: number;
+  onPress: () => void;
   onToggleOwned: () => void;
   onToggleReorder: () => void;
 }
@@ -15,11 +16,15 @@ interface ColorCardProps {
 function ColorCard({
   color,
   cardWidth,
+  onPress,
   onToggleOwned,
   onToggleReorder,
 }: ColorCardProps) {
   return (
-    <View style={[styles.card, { width: cardWidth }]}>
+    <TouchableOpacity
+      style={[styles.card, { width: cardWidth }]}
+      onPress={onPress}
+    >
       <Text style={styles.brandtext} numberOfLines={2}>
         {color.brand}
       </Text>
@@ -45,7 +50,7 @@ function ColorCard({
           <Text style={styles.chipText}>Owned</Text>
         </TouchableOpacity>
       )}
-    </View>
+    </TouchableOpacity>
   );
 }
 export default memo(ColorCard);

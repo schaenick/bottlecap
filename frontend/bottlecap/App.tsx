@@ -7,6 +7,7 @@ import SearchBar from "./components/SearchBar";
 import FilterBar from "./components/FilterBar";
 import Header from "./components/Header";
 import { SafeAreaProvider } from "react-native-safe-area-context";
+import ColorModal from "./components/ColorModal";
 
 export default function App() {
   const [colors, setColors] = useState<Color[]>([]);
@@ -14,7 +15,9 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [filter, setFilter] = useState("all");
   const [brand, setBrand] = useState("all");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
 
+  const selectedColor = colors.find((c) => c.id === selectedId) ?? null;
   const filteredColors = useMemo(() => {
     return colors
 
@@ -65,6 +68,16 @@ export default function App() {
     );
   };
 
+  const handleSave = async (
+    id: number,
+    comment: string,
+    description: string,
+  ) => {
+    await updateColor(id, { comment, description });
+    setColors(
+      colors.map((c) => (c.id === id ? { ...c, comment, description } : c)),
+    );
+  };
   useEffect(() => {
     const load = async () => {
       const data = await getColors();
@@ -93,11 +106,19 @@ export default function App() {
               colors={filteredColors}
               onToggleOwned={handleToggleOwned}
               onToggleReorder={handleToggleReorder}
+              onPress={(color) => setSelectedId(color.id)}
               ownedCount={ownedCount}
             />
           </View>
         )}
       </View>
+      <ColorModal
+        color={selectedColor}
+        onClose={() => setSelectedId(null)}
+        onToggleOwned={handleToggleOwned}
+        onToggleReorder={handleToggleReorder}
+        onSave={handleSave}
+      />
     </SafeAreaProvider>
   );
 }

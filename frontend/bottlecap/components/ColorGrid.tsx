@@ -11,11 +11,13 @@ interface ColorGridProps {
   ownedCount: number;
   onToggleOwned: (id: number) => void;
   onToggleReorder: (id: number) => void;
+  onPress: (color: Color) => void;
 }
 
 export default function ColorGrid({
   colors,
   ownedCount,
+  onPress,
   onToggleOwned,
   onToggleReorder,
 }: ColorGridProps) {
@@ -29,6 +31,7 @@ export default function ColorGrid({
         <ColorCard
           color={item}
           cardWidth={cardWidth}
+          onPress={() => onPress(item)}
           onToggleOwned={() => onToggleOwned(item.id)}
           onToggleReorder={() => onToggleReorder(item.id)}
         />
