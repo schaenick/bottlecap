@@ -1,19 +1,25 @@
 import { Color } from "../types/color";
 import BottleIcon from "./BottleIcon";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { cardWidth } from "./ColorGrid";
+
 import { theme } from "../theme/theme";
 import { memo } from "react";
 
 interface ColorCardProps {
   color: Color;
+  cardWidth: number;
   onToggleOwned: () => void;
   onToggleReorder: () => void;
 }
 
-function ColorCard({ color, onToggleOwned, onToggleReorder }: ColorCardProps) {
+function ColorCard({
+  color,
+  cardWidth,
+  onToggleOwned,
+  onToggleReorder,
+}: ColorCardProps) {
   return (
-    <View style={styles.card}>
+    <View style={[styles.card, { width: cardWidth }]}>
       <Text style={styles.brandtext} numberOfLines={2}>
         {color.brand}
       </Text>
@@ -42,7 +48,6 @@ export default memo(ColorCard);
 
 const styles = StyleSheet.create({
   card: {
-    width: cardWidth,
     margin: theme.spacing.xs,
     backgroundColor: theme.colors.card,
     borderRadius: theme.radius.sm,
