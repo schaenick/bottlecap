@@ -1,17 +1,30 @@
-import { StatusBar } from 'expo-status-bar';
+
 import { ActivityIndicator } from 'react-native'; 
 import { StyleSheet, Text, View } from 'react-native';
-import { useState, useEffect } from 'react';
+import { useState,useMemo, useEffect } from 'react';
 import { Color } from "./types/color";
 import { getColors, updateColor } from './services/api';
-import BottleIcon from './components/BottleIcon'
-import ColorCard from './components/ColorCard';
 import ColorGrid from './components/ColorGrid';
+import SearchBar from './components/SearchBar';
 
 
 export default function App(){
   const [colors, setColors] = useState<Color[]>([])
   const [loading, setLoading] = useState(true)
+  const [search, setSearch] = useState('')
+  const [filter, setFilter] = useState('all')
+  const [brand, setBrand] = useState('all')
+
+   const filteredColors = useMemo(() => {
+    return colors
+        .filter(c => filter === 'all' || (filter === 'owned' && c.owned))
+        .filter(c => brand === 'all' || c.brand === brand)
+        .filter(c => 
+            search === '' || 
+            c.name.toLowerCase().includes(search.toLowerCase()) ||
+            c.article_number.includes(search)
+        )
+}, [colors, filter, brand, search])
 
   const handleToggleOwned = async (id: number) => {
     const color = colors.find(c => c.id === id)
@@ -25,7 +38,6 @@ export default function App(){
     ))
 }
 
-
 const handleToggleReorder = async (id: number) => {
     const color = colors.find(c => c.id === id)
 
@@ -37,6 +49,7 @@ const handleToggleReorder = async (id: number) => {
         c.id === id ? { ...c, reorder: newReorder } : c
     ))
 }
+
   useEffect(() => {
       const load = async () => {
           const data = await getColors()
@@ -49,13 +62,19 @@ const handleToggleReorder = async (id: number) => {
       loading ? (
           <ActivityIndicator />
       ) : (
+        <View>
+            <SearchBar 
+    value={search} 
+    onChangeText={setSearch} 
+/>
+        
           <View>
               <ColorGrid 
-    colors={colors} 
+    colors={filteredColors} 
     onToggleOwned={handleToggleOwned}
     onToggleReorder={handleToggleReorder}
 />
-          </View>
+          </View></View>
       )
   )}
 
