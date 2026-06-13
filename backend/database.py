@@ -1,7 +1,9 @@
 import sqlite3
 from pathlib import Path
+import os
 
-database_path = Path(__file__).parent / "bottlecap.db"
+DATA_DIR = os.environ.get("DATA_DIR", str(Path(__file__).parent))
+database_path = Path(DATA_DIR) / "bottlecap.db"
 
 
 def get_db():
@@ -24,7 +26,7 @@ def init_db():
         brand VARCHAR(50), 
         owned BOOL,
         reorder BOOL, 
-        comment TEXT),
+        comment TEXT,
         UNIQUE(brand, name))
         """)
 
