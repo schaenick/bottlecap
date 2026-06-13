@@ -11,7 +11,6 @@ import { useState, useEffect } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Color } from "../types/color";
 import { theme } from "../theme/theme";
-import BottleIcon from "./BottleIcon";
 import ColorSwatch from "./ColorSwatch";
 
 interface ColorModalProps {
