@@ -24,22 +24,16 @@ for row in data:
         False,
     )
     cur.execute(
-        "INSERT INTO colors (article_number, shelf_number, name, hex, description, brand, owned, reorder) VALUES (?,?,?,?,?,?,?, ?)",
+        """
+        INSERT INTO colors (article_number, shelf_number, name, hex, description, brand, owned, reorder)
+        VALUES (?,?,?,?,?,?,?,?)
+        ON CONFLICT(brand, name) DO UPDATE SET
+            article_number = excluded.article_number,
+            shelf_number = excluded.shelf_number,
+            hex = excluded.hex,
+            description = excluded.description
+        """,
         values,
     )
 con.commit()
 con.close()
-
-"""
-    cur.execute(
-        CREATE TABLE IF NOT EXISTS colors(
-        id INTEGER PRIMARY KEY, 
-        article_number VARCHAR(20), 
-        shelf_number VARCHAR(20), 
-        name VARCHAR(100), 
-        hex VARCHAR(10), 
-        description TEXT, 
-        brand VARCHAR(50), 
-        owned BOOL, 
-        comment TEXT)
-        """

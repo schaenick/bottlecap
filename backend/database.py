@@ -24,8 +24,10 @@ def init_db():
         brand VARCHAR(50), 
         owned BOOL,
         reorder BOOL, 
-        comment TEXT)
+        comment TEXT),
+        UNIQUE(brand, name))
         """)
+
     con.commit()
     con.close()
 
