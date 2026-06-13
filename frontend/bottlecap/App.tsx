@@ -19,22 +19,24 @@ export default function App() {
 
   const selectedColor = colors.find((c) => c.id === selectedId) ?? null;
   const filteredColors = useMemo(() => {
-    return colors
+    const query = search.trim().toLowerCase();
 
+    return colors
       .filter(
         (c) =>
           filter === "all" ||
           (filter === "owned" && c.owned) ||
-          (filter === "reorder" && c.reorder) ||
-          (filter === "notowned" && !c.owned),
+          (filter === "reorder" && c.reorder),
       )
       .filter((c) => brand === "all" || c.brand.includes(brand))
       .filter(
         (c) =>
-          search === "" ||
-          c.name.toLowerCase().includes(search.toLowerCase()) ||
-          c.article_number.includes(search) ||
-          c.brand.toLowerCase().includes(search.toLowerCase()),
+          query === "" ||
+          c.name.toLowerCase().includes(query) ||
+          c.article_number?.includes(query) ||
+          c.brand.toLowerCase().includes(query) ||
+          c.comment?.toLowerCase().includes(query) ||
+          c.description?.toLowerCase().includes(query),
       );
   }, [colors, filter, brand, search]);
 
